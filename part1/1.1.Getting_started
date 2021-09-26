@@ -1,0 +1,15 @@
+$ docker container run -d nginx
+01957cd69d2191dc7759dc84742afca0aad1b55655c9219a8e456711dfa5533b
+$ docker container run -d nginx
+29879c47dee5c85d8836cf7e853fe9121a0413f98f8b3b27ed226f0b89c3073f
+$ docker container run -d nginx
+2aded6ac5ca1153d96a2ddffab99d455cb73719dd3ac62182c29fc2df5d11c80
+$ docker stop 01 29
+01
+29
+$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+2aded6ac5ca1   nginx     "/docker-entrypoint.…"   13 seconds ago   Up 13 seconds              80/tcp    sad_fermi
+29879c47dee5   nginx     "/docker-entrypoint.…"   15 seconds ago   Exited (0) 4 seconds ago             adoring_curie
+01957cd69d21   nginx     "/docker-entrypoint.…"   17 seconds ago   Exited (0) 4 seconds ago             optimistic_mcnulty
+
