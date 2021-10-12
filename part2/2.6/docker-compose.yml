@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+
+   redis-composed:
+      image: library/redis
+      container_name: redis-composed
+      command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+
+   db:
+      image: postgres:14-alpine
+      restart: unless-stopped
+      environment:
+         POSTGRES_PASSWORD: exercise
+      container_name: db
+
+   backend-composed:
+      build: 
+         context: ../2.4/ 
+         dockerfile: Dockerfile.backend
+      container_name: backend-composed
+      ports:
+         - 8080:8080
+      environment:
+         POSTGRES_HOST: db
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: exercise 
+         POSTGRES_DATABASE: postgres
+         REQUEST_ORIGIN: http://localhost:5000
+         REDIS_HOST: redis-composed
+      depends_on:
+         - db
+
+   frontend-composed:
+      build: 
+         context: ../../part1/1.14.Environment
+         dockerfile: Dockerfile.frontend
+      container_name: frontend-composed
+      ports:
+         - 5000:5000

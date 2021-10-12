@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+
+   backend-composed:
+      build: 
+         context: ../../part1/1.14.Environment 
+         dockerfile: Dockerfile.backend
+      container_name: backend-composed
+      ports:
+         - 8080:8080
+
+   frontend-composed:
+      build: 
+         context: ../../part1/1.14.Environment
+         dockerfile: Dockerfile.frontend
+      container_name: frontend-composed
+      ports:
+         - 5000:5000

@@ -1,0 +1,38 @@
+version: '3.5'
+
+services:
+
+   nginx:
+      image: nginx:1.19-alpine
+      volumes:
+         - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+         - 80:80
+      environment:
+         NGINX_HOST: localhost
+         NGINX_PORT: 80
+
+   backend-composed:
+      build: 
+         context: ../2.4/ 
+         dockerfile: Dockerfile.backend
+      container_name: backend-composed
+      ports:
+         - 8080:8080
+      environment:
+         REQUEST_ORIGIN: http://localhost
+         REDIS_HOST: redis-composed
+
+   frontend-composed:
+      build: 
+         context: ../../part1/1.14.Environment
+         dockerfile: Dockerfile.frontend
+      container_name: frontend-composed
+      ports:
+         - 5000:5000
+
+   redis-composed:
+      image: library/redis
+      container_name: redis-composed
+      command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+

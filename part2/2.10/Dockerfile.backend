@@ -1,0 +1,22 @@
+#
+# Build:
+# docker build -t backend -f Dockerfile.backend . 
+#
+# Run:
+# docker run -d -p 8080:8080 backend
+#
+
+FROM golang:1.16
+
+WORKDIR /usr/src/app
+
+COPY ./example-backend/ .
+
+RUN go build 
+
+EXPOSE 8080
+
+ENV GIN_MODE=release
+
+CMD ./server
+
