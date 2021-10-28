@@ -1,0 +1,10 @@
+After using Alpine in 3.5:
+
+35_frontend-composed      latest      161MB
+35_backend-composed       latest      467MB
+
+Now:
+
+36frontend_and_37backend_frontend-composed   latest     126MB
+36frontend_and_37backend_backend-composed    latest     23.3MB
+

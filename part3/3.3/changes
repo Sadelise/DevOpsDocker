@@ -1,0 +1,7 @@
+Added following lines to both Dockerfiles: 
+
+RUN useradd -m appuser
+
+USER appuser
+
+

@@ -1,0 +1,35 @@
+#
+# Build:
+# docker build -f Dockerfile.frontend -t frontend .
+#
+# Run:
+# docker run -d -p 5000:5000 frontend
+#
+
+FROM node:lts-alpine3.14 as build-stage
+
+WORKDIR /usr/src/app
+
+COPY ./example-frontend/ .
+
+RUN npm install \
+    && npm run build
+
+
+FROM node:lts-alpine3.14
+
+WORKDIR /usr/src/app
+
+COPY --from=build-stage /usr/src/app/build ./build
+
+RUN adduser -D appuser \
+    && npm install -g serve  
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+
+USER appuser
+
+EXPOSE 5000
+
+CMD serve -s -l 5000 build
+

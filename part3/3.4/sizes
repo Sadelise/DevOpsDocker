@@ -1,0 +1,10 @@
+Before:
+
+33_frontend-composed       latest    1.17GB
+33_backend-composed        latest    1.07GB
+
+After :
+
+34_frontend-composed       latest    987MB
+34_backend-composed        latest    1.07GB
+

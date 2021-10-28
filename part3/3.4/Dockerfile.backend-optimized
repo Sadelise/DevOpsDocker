@@ -1,0 +1,31 @@
+#
+# Build:
+# docker build -t backend -f Dockerfile.backend . 
+#
+# Run:
+# docker run -d -p 8080:8080 backend
+#
+
+FROM golang:1.16
+
+WORKDIR /usr/src/app
+
+COPY ./example-backend/ .
+
+RUN go build \ 
+    && useradd -m appuser \
+    && rm -rf cache \
+    && rm -rf common \
+    && rm -rf controller \
+    && rm -rf pgconnection \
+    && rm -rf router \
+    && find . -type f -not -name 'server' -delete
+
+USER appuser
+
+EXPOSE 8080
+
+ENV GIN_MODE=release
+
+CMD ./server
+

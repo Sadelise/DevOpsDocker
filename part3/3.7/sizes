@@ -1,0 +1,10 @@
+Optimization done to ml-kurkkumopo-frontend dockerfile
+
+Before:
+
+ml-kurkkumopo-frontend      original     1.11GB
+
+After:
+
+ml-kurkkumopo-frontend      optimized    96.9MB
+
